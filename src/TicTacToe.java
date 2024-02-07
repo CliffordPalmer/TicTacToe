@@ -10,11 +10,14 @@
  * @version: Jan 2023
  */
 
+import java.awt.*;
 import java.util.Scanner;
 
 public class TicTacToe
 {
     /** Board Markers **/
+
+    private TicTacToeViewer window;
     public static final String X_MARKER = "X";
     public static final String O_MARKER = "O";
     public static final String BLANK = "-";
@@ -44,11 +47,16 @@ public class TicTacToe
     public TicTacToe() {
         // Initialize Squares in the board
         this.board = new Square[3][3];
+        window = new TicTacToeViewer(board, this);
+
         for(int row = 0; row < this.board.length; row++) {
             for(int col = 0; col< this.board[row].length; col++) {
-                this.board[row][col] = new Square(row, col);
+                this.board[row][col] = new Square(row, col, window);
             }
         }
+
+        // Initialize window
+
 
         // Initialize winning stats variables
         this.isGameOver = false;
@@ -280,6 +288,7 @@ public class TicTacToe
             row++;
             System.out.println();
         }
+        window.repaint();
     }
 
     public static void main(String[] args) {
